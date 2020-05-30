@@ -4,7 +4,8 @@ RUN mkdir /test2 \
 WORKDIR /test2
 COPY Gemfile /test2/Gemfile
 COPY Gemfile.lock /test2/Gemfile.lock
-RUN bundle install
+RUN bundle config build.nokogiri --use-system-libraries \
+    && bundle install
 COPY . /test2
 ENV MYSQL_ALLOW_EMPTY_PASSWORD yes
 
