@@ -19,10 +19,10 @@ FROM ruby:2.5
 WORKDIR /test2
 COPY Gemfile /test2/Gemfile
 # COPY Gemfile.lock /test2/Gemfile.lock
-RUN apt-get install libxslt-dev libxml2-dev \
-    gem install nokogiri -v '1.10.9' \
-    bundle config build.nokogiri --use-system-libraries \
-    && bundle install
+RUN apt-get install libxslt-dev libxml2-dev
+RUN gem install nokogiri -v '1.10.9'
+RUN bundle config build.nokogiri --use-system-libraries
+RUN bundle install
 COPY . /test2
 ENV MYSQL_ALLOW_EMPTY_PASSWORD yes
 
