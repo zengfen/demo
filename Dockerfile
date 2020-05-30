@@ -1,6 +1,7 @@
 FROM ruby:2.5
 RUN mkdir /test2 \
-    && apt-get install libxml2-dev libxslt-dev
+    && apt-get install libxml2-dev libxslt-dev \
+    && apt install -y build-essential patch ruby-dev zlib1g-dev liblzma-dev
 WORKDIR /test2
 COPY Gemfile /test2/Gemfile
 COPY Gemfile.lock /test2/Gemfile.lock
