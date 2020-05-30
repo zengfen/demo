@@ -14,7 +14,7 @@ RUN  sed -i s@/security.debian.org/@/mirrors.163.com/@g /etc/apt/sources.list
 RUN  apt-get clean
 
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
-RUN apt-get update && apt-get install -y  nodejs  yarn mysql-client postgresql-client sqlite3 --no-install-recommends && rm -rf /var/lib/apt/lists/*
+# RUN apt-get update && apt-get install -y  nodejs  yarn mysql-client postgresql-client sqlite3 --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /test2
 COPY Gemfile /test2/Gemfile
