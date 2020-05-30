@@ -18,7 +18,7 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 
 WORKDIR /test2
 COPY Gemfile /test2/Gemfile
-COPY Gemfile.lock /test2/Gemfile.lock
+# COPY Gemfile.lock /test2/Gemfile.lock
 RUN bundle config build.nokogiri --use-system-libraries \
     && bundle install
 COPY . /test2
