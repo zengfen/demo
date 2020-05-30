@@ -1,0 +1,44 @@
+version: '2'
+volumes:
+  mysql_data: {}
+services:
+  db:
+    image: mysql:5.7.17
+    container_name: demo_db_1
+    restart: unless-stopped
+    hostname: localhost
+#    network_mode: "bridge"
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_ROOT_HOST=localhost
+      - MYSQL_ROOT_PASSWORD=fenfenlehe
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - "./mysql_data/db:/var/lib/mysql"
+      - "./mysql_data/conf/my.cnf:/etc/my.cnf"
+      - "./mysql_data/init:/docker-entrypoint-initdb.d/"
+
+#      - "./mysql_data/db/:/var/lib/mysql"
+#      - "./mysql_data/conf/my.cnf:/etc/my.cnf"
+#
+#      - "./mysql_data/mysql/conf.d:/etc/mysql/conf.d/"
+#      - "./mysql_data/mysql/mysql.conf.d/:/etc/mysql/mysql.conf.d/"
+#      - "./mysql_data/mysqld/:/var/run/mysqld/"
+    ports:
+      - "3306:3306"
+    command: ['mysqld', '--character-set-server=utf8']
+    tty: true
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/test2
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_HOST=demo_db_1
+      - DATABASE_USER=root
+      - DATABASE_PORT=3306
