@@ -9,18 +9,18 @@ default: &default
   encoding: utf8
   pool: 5
   username: root
-  password:
-  host: 127.0.0.1
+  password: fenfenlehe
+  host: demo_db_1
   port: 3306
 
 development:
   <<: *default
-  database: ruby
+  database: ruby_test2
 
 test:
   <<: *default
-  database: ruby
+  database: ruby_test2
 
 production:
   <<: *default
-  database: ruby
+  database: ruby_test2
